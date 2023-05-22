@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useFetch } from "../../hooks/useFetch"
 import { HeroCard } from "./HeroCard"
+import { getHeroByPublisher } from "../helpers/getHeroesByPublisher";
 
 // AQUI NOS ENCARGAREMOS DE MONTAR LOS HEROES QUE ENCONTRREMOS
-export const HeroList = ({heroes, isLoading}) => {
+export const HeroList = ({publisher}) => {
 
-    
 
-    const [datos, setdatos] = useState([{}]);
-    const [condicional, setcondicional] = useState(true);
-
+    const { heroes, isLoading } =  useFetch(publisher);
+    console.log('Entramos a HeroList');
 
         
   return (

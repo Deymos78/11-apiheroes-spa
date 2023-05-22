@@ -1,9 +1,7 @@
-import { json } from "react-router-dom";
 
-export const helperFetch = async() => {
+export const getHeroByPublisher = async(publisher) => {
 
     let url='https://www.superheroapi.com/api.php/244145151627647/';
-    
    
     let arrayobj =[];
 
@@ -25,7 +23,7 @@ export const helperFetch = async() => {
     }).
     then(results =>{
         results.forEach(data =>{
-            if (data.biography.publisher == 'Marvel Comics'){
+            if (data.biography.publisher == publisher){
                 let obj ={id: data.id,
                     name: data.name,
                     img: data.image.url,
