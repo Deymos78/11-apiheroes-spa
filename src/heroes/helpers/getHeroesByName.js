@@ -4,10 +4,7 @@ import { HeroByName } from "./HeroByNameHelper";
 
 export const getHeroesByName = ( name='' ) => {
 
-    console.log('Estas en el GetHeroes');
-    console.log('Estas en '+ name.length);
-    console.log('Con nombre '+name);
-    
+
     const [heroes, setheroes] = useState([])
     const [isLoading, setisLoading] = useState(false);
     

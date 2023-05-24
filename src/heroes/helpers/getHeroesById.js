@@ -1,42 +1,38 @@
 import { useEffect, useState } from "react";
 
-
 const HeroById = async(id) => {
-    // console.log('Holisss')
+    // console.log('Holisss');
 
-    let url='https://superheroapi.com/api/access-token/';
-
-    url = url+id;
+    const url=`https://www.superheroapi.com/api.php/244145151627647/${ id }`;
 
     const resp = await fetch(url);
 
     const data = await resp.json();
-    
-    const heroeId = data.map(hero => ({
-        id: hero.id,
-        name: hero.name,
-        img: hero.image.url,
-        first_appearance: hero.biography.first_appearance,
-        publisher: hero.biography.publisher,
-        alignment: hero.biography.alignment
-    }));
 
-   
+    
+    const heroeId = {
+        id: data.id,
+        name: data.name,
+        img: data.image.url,
+        first_appearance: data.biography['first-appearance'],
+        publisher: data.biography.publisher,
+        alignment: data.biography.alignment
+    };
+
   return heroeId;
 }
 
-
 export const getHeroesById = ( id ) => {
     
-    const [heroes, setheroes] = useState([{}]);
-    const [isLoading, setisLoading] = useState(false)
+    const [hero, sethero] = useState([]);
 
     // Creamos una funcion que cuando se ejecute se hara la busqueda de los personajes
     const getHeroesId = async() => {
         const heroes = await HeroById( id );
+        // console.log('ESTO ES LO QUE NOS HA DEVUELTO');
+        // console.log(heroes);
         
-        setheroes(heroes);
-        setisLoading(true);
+        sethero(heroes);
     }
 
 
@@ -48,7 +44,6 @@ export const getHeroesById = ( id ) => {
     
   
     return {
-        heroes,
-        isLoading
+        hero
     }
 }

@@ -21,21 +21,14 @@ export const SearchPage = () => {
   const { q='' } = queryString.parse(location.search);
 
   // Aqui se realiza las peticiones hacia la API y se le pasa como argumento el nombre que se haya colocado en el input
-  console.log('Esta es la cadena recupeara '+ q.length);
-  console.log(typeof q)
-
   const {heroes, isLoading}  = getHeroesByName( q );
-  console.log(typeof heroes);
-  console.log(heroes);
-
-  // console.log('Hemos vuelto y la longitu del objeto es' + heroes.length);
   
   // ShowSearch es una constante que nos ayudara a mostrar por pantalla el estado de la peticion hacia la API
   // En este caso comprobamos que hay texto en el input 
   const showSearch = ( q.length === 0);
   
   // En el caso de que haya datos dentro del input y no se haya devuelto resultados significara que no hay heroes con eso nombres
-  const showError =(q.length >0) && heroes.length ===0;
+  const showError =(q.length >0) && heroes.length === 0;
     
   const {searchText, onInputChange, onResetForm} = useForm({
     searchText: q
@@ -58,8 +51,8 @@ export const SearchPage = () => {
       <hr />
     
     
-      <div className="row">
-        <div className="col-5">
+      <div className="row" >
+        <div className="col-5" >
           <h4>Searching</h4>
           <hr />
           <form onSubmit={ onSearchSubmit }>

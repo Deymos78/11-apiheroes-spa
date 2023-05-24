@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useFetch } from "../../hooks/useFetch"
 import { HeroCard } from "./HeroCard"
 import { getHeroByPublisher } from "../helpers/getHeroesByPublisher";
@@ -8,7 +8,6 @@ export const HeroList = ({publisher}) => {
 
 
     const { heroes, isLoading } =  useFetch(publisher);
-    console.log('Entramos a HeroList');
 
         
   return (

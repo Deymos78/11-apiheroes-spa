@@ -20,7 +20,7 @@ export const useFetch = ( publisher ) => {
       
         getHeroes();
         
-    }, [])
+    }, [  ])
     
   
     return {

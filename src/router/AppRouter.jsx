@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-import { MarvelPage } from "../heroes/pages/MarvelPage"
+
 import { LoginPage } from "../auth/pages/LoginPage"
 import { HeroesRoutes } from "../heroes/routes/HeroesRoutes"
+import { PublicRoute } from "./PublicRoute"
+import { PrivateRoute } from "./PrivateRoute"
 
 // AppRoute es el nombre con el que se suele dar al primer router de la aplicacion
 export const AppRouter = () => {
@@ -9,9 +11,17 @@ export const AppRouter = () => {
     <>
         <Routes>
 
-            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/login" element={
+                <PublicRoute>
+                    <LoginPage/>
+                </PublicRoute>
+            }/>
 
-            <Route path="/*" element={<HeroesRoutes/>}/>
+            <Route path="/*" element={
+                <PrivateRoute>
+                    <HeroesRoutes/>
+                </PrivateRoute>
+            }/>
 
         </Routes>
     </>

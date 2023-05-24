@@ -1,7 +1,25 @@
-import { Link, NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../auth/context/AuthContext';
 
 // ESTA SERA LA BARRA DE NAVEGACION
 export const NavBar = () => {
+
+    // Para desloguear correctamente al usuario recuperamos los datos del context para poder usarlas aqui
+
+    const {user, logout} = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const onLogout = () => {
+
+        logout();
+
+        navigate('/login', {
+            replace: true
+        });
+    }
+    
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
             
@@ -15,15 +33,15 @@ export const NavBar = () => {
                 <div className="navbar-nav">
 
                     <NavLink
-                        className="nav-item nav-link" 
-                        to="/marvel"
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`} 
+                        to="/marvel" exact 
                     >
                         Marvel 
                     </NavLink>
 
                     <NavLink 
-                        className="nav-item nav-link" 
-                        to="/dc"
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`} 
+                        to="/dc" exact 
                     >
                         DC 
                     </NavLink>
@@ -31,7 +49,8 @@ export const NavBar = () => {
                     <NavLink 
                         // className="nav-item nav-link" 
                         className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : '' }`} 
-                        to="/search"
+
+                        to="/search" exact 
                     >
                         Search
                     </NavLink>
@@ -43,14 +62,15 @@ export const NavBar = () => {
                     <span
                     className='nav-item nav-link text-primary'
                     >
-                        Andres
+                        { user?.name }
+                        {/* Andres */}
                     </span>
 
                     <button 
                         className="nav-item nav-link btn"
-                        // onClick={}
+                        onClick={ onLogout }
                     >
-                        Cerra Sesion
+                        Logout
                     </button>
                 </ul>
             </div>
